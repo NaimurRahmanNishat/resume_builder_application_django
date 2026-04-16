@@ -1,25 +1,55 @@
-{% extends 'master.html' %}
+{% extends 'master.html' %} {% block content %}
 
-{% block content %}
-<h1>Student Data</h1>
+<style>
+  table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04aa6d;
+    color: white;
+  }
+</style>
+
+<h1>Person Resume Data Table</h1>
 <table>
   <tr>
-    <th>Name</th>
+    <th>Full Name</th>
     <th>Email</th>
-    <th>Department</th>
     <th>Address</th>
+    <th>Phone</th>
     <th>Actions</th>
   </tr>
-  {% for student in studentData %}
+  {% for i in person %}
   <tr>
-    <td>{{ student.name }}</td>
-    <td>{{ student.email }}</td>
-    <td>{{ student.department }}</td>
-    <td>{{ student.address }}</td>
-    <td>
-      <a href="{% url 'editStudent' id=student.id %}">Edit</a>
-      <a href="{% url 'deleteStudent' id=student.id %}">Delete</a>
-    </td>
+    <td>{{ i.full_name }}</td>
+    <td>{{ i.email }}</td>
+    <td>{{ i.address }}</td>
+    <td>{{ i.phone }}</td>
+    {% comment %} <td>
+      <a href="{% url 'viewResume' id=person.id %}">View</a>
+      <a href="{% url 'editResume' id=person.id %}">Edit</a>
+      <a href="{% url 'deleteResume' id=person.id %}">Delete</a>
+    </td> {% endcomment %}
   </tr>
   {% endfor %}
 </table>
