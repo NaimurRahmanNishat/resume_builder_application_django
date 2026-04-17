@@ -75,17 +75,20 @@ def addResume(request):
 
 
 
-
+# ================= VIEW RESUME =================
 def viewResume(request, id):
-    pass
-    # return render(request, 'viewResume.html')
+    return render(request, 'viewResume.html')
 
 
+
+# ================= EDIT RESUME =================
 def editResume(request, id):
     pass
     # return render(request, 'editResume.html')
 
 
+
+# ================= DELETE RESUME =================
 def deleteResume(request, id):
     pass
     # return render(request, 'deleteResume.html')

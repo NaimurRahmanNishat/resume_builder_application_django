@@ -1,4 +1,6 @@
-{% extends 'master.html' %} {% block content %}
+{% extends 'master.html' %}
+
+{% block content %}
 
 <style>
   table {
@@ -30,7 +32,7 @@
   }
 </style>
 
-<h1>Person Resume Data Table</h1>
+<h1 class="p-4 font-semibold text-xl text-gray-600">Person Resume Data Table</h1>
 <table>
   <tr>
     <th>Full Name</th>
@@ -45,11 +47,11 @@
     <td>{{ i.email }}</td>
     <td>{{ i.address }}</td>
     <td>{{ i.phone }}</td>
-    {% comment %} <td>
-      <a href="{% url 'viewResume' id=person.id %}">View</a>
-      <a href="{% url 'editResume' id=person.id %}">Edit</a>
-      <a href="{% url 'deleteResume' id=person.id %}">Delete</a>
-    </td> {% endcomment %}
+    <td>
+      <a href="{% url 'viewResume' id=i.id %}">View</a>
+      <a href="{% url 'editResume' id=i.id %}">Edit</a>
+      <a href="{% url 'deleteResume' id=i.id %}">Delete</a>
+    </td> 
   </tr>
   {% endfor %}
 </table>
