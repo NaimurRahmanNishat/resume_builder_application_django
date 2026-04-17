@@ -77,7 +77,12 @@ def addResume(request):
 
 # ================= VIEW RESUME =================
 def viewResume(request, id):
-    return render(request, 'viewResume.html')
+    person = Resume.objects.get(id=id)
+
+    personDict = {
+        'person':person
+    }
+    return render(request, 'viewResume.html', personDict)
 
 
 

@@ -2,8 +2,26 @@
 
 {% block content %}
 
-<h1 class="text-center py-12 font-semibold text-[40px] text-gray-700">View Resume</h1>
+<h1 class="text-center py-12 font-semibold text-[40px] text-gray-700">
+  View Resume
+</h1>
 
+<div class="px-16 w-full md:max-w-7xl mx-auto">
+  <div class="bg-[#04AA6D] px-4 py-2 flex items-center justify-between">
+    <!-- Image -->
+    <div class=" rounded-full bg-white w-fit">
+      {% if person.profile_pic %}
+        <img src="{{ person.profile_pic.url }}" alt="profile" class="w-32 h-32 rounded-full object-cover">
+      {% else %}
+        <p class="text-center">No image</p>
+      {% endif %}
+    </div>
 
+    <h2 class="font-semibold text-2xl text-white">{{ person.full_name }}</h2>
+  </div>
+  <div class="bg-gray-200 px-4 py-6">
+    <h2 class="font-semibold text-2xl text-gray-900 pt-2">{{ person.full_name }}</h2>
+  </div>
+</div>
 
 {% endblock content %}
