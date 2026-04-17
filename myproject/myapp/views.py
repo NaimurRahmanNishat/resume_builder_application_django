@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from myapp.models import Resume, Education, WorkExperience, Skill
 
 
@@ -78,23 +78,85 @@ def addResume(request):
 # ================= VIEW RESUME =================
 def viewResume(request, id):
     person = Resume.objects.get(id=id)
+    edecation = Education.objects.get(id=id)
+    work_experience = WorkExperience.objects.get(id=id)
+    skill = Skill.objects.get(id=id)
 
     personDict = {
-        'person':person
+        'person':person,
+        'education': edecation,
+        'work_experience':work_experience,
+        'skill': skill
     }
     return render(request, 'viewResume.html', personDict)
 
 
+# def viewResume(request, id):
+#     person = get_object_or_404(Resume, id=id)
+#     context = {
+#         'person': person,
+#         'education': person.educations.all(),
+#         'work_experience': person.experiences.all(),
+#         'skill': person.skills.all()
+#     }
+#     return render(request, 'viewResume.html', context)
+
 
 # ================= EDIT RESUME =================
 def editResume(request, id):
-    pass
-    # return render(request, 'editResume.html')
+    person = Resume.objects.filter(id=id).first()
+    education = Education.objects.get(id=id)
+    work_experience = WorkExperience.objects.get(id=id)
+    skill = Skill.objects.get(id=id)
+
+    if request.method == 'POST':
+        person.full_name = request.POST.get('full_name')
+        person.profile_pic = request.POST.get('profile_pic')
+        person.address = request.POST.get('address')
+        person.phone = request.POST.get('phone')
+        person.email = request.POST.get('email')
+        person.career_objective = request.POST.get('career_objective')
+        person.certification = request.POST.get('certification')
+        person.project = request.POST.get('project')
+        person.reference = request.POST.get('reference')
+        education.degree = request.POST.get('degree')
+        education.institution = request.POST.get('institution')
+        education.graduation_year = request.POST.get('graduation_year')
+        work_experience.company = request.POST.get('company')
+        work_experience.position = request.POST.get('position')
+        work_experience.start_date = request.POST.get('start_date')
+        work_experience.end_date = request.POST.get('end_date')
+        skill.name = request.POST.get('name')
+        skill.type = request.POST.get('type')
+        person.save()
+        return redirect('home')
+    
+    personDict = {
+        'person': person,
+        'education': education,
+        'work_experience': work_experience,
+        'skill': skill
+    }
+    return render(request, 'editResume.html', personDict)
 
 
 
 # ================= DELETE RESUME =================
+# def deleteResume(request, id):
+#     person = Resume.objects.get(id=id)
+#     work_experience = WorkExperience.objects.get(id=id)
+#     education = Education.objects.get(id=id)
+#     skill = Skill.objects.get(id=id)
+
+#     return render(request, 'deleteResume.html')
+
 def deleteResume(request, id):
-    pass
-    # return render(request, 'deleteResume.html')
+    person = get_object_or_404(Resume, id=id)
+
+    if request.method == 'POST':
+        person.delete()   # This deletes EVERYTHING (cascade)
+    return redirect('home')
+
+    # return render(request, 'deleteResume.html', {'person': person})
+
 

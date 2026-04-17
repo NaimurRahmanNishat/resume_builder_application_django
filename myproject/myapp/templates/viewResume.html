@@ -1,4 +1,4 @@
-{% extends "master.html" %}
+{% extends "master.html" %} 
 
 {% block content %}
 
@@ -6,21 +6,73 @@
   View Resume
 </h1>
 
-<div class="px-16 w-full md:max-w-7xl mx-auto">
+<div class="md:px-16 w-full md:max-w-7xl mx-auto">
   <div class="bg-[#04AA6D] px-4 py-2 flex items-center justify-between">
     <!-- Image -->
-    <div class=" rounded-full bg-white w-fit">
+    <div class="rounded-full bg-white w-fit">
       {% if person.profile_pic %}
-        <img src="{{ person.profile_pic.url }}" alt="profile" class="w-32 h-32 rounded-full object-cover">
+      <img
+        src="{{ person.profile_pic.url }}"
+        alt="profile"
+        class="w-32 h-32 rounded-full object-cover"
+      />
       {% else %}
-        <p class="text-center">No image</p>
+      <p class="text-center">No image</p>
       {% endif %}
     </div>
 
-    <h2 class="font-semibold text-2xl text-white">{{ person.full_name }}</h2>
+    <div>
+      <h2 class="font-semibold text-2xl text-white">{{ person.full_name }}</h2>
+      <p class="font-semibold text-white">{{person.email}}</p>
+      <p class="font-semibold text-white">{{person.phone}}</p>
+      <p class="font-semibold text-white">{{person.address}}</p>
+    </div>
   </div>
   <div class="bg-gray-200 px-4 py-6">
-    <h2 class="font-semibold text-2xl text-gray-900 pt-2">{{ person.full_name }}</h2>
+    <div class="pb-6">
+      <h3 class="font-bold text-2xl">Objective</h3>
+      <hr class="border-2 border-black w-full my-2" />
+      <p>{{person.career_objective}}</p>
+    </div>
+    <div class="pb-6">
+      <h3 class="font-bold text-2xl">Education</h3>
+      <hr class="border-2 border-black w-full my-2" />
+      <p>{{education.institution}}</p>
+      <p>{{education.degree}}</p>
+      <p>{{education.graduation_year}}</p>
+    </div>
+    <div class="pb-6">
+      <h3 class="font-bold text-2xl">Work Experience</h3>
+      <hr class="border-2 border-black w-full my-2" />
+      <p>{{work_experience.company}}</p>
+      <p>{{work_experience.position}}</p>
+      <p>{{work_experience.start_date}}</p>
+      <p>{{work_experience.end_date}}</p>
+    </div>
+    <div class="pb-6">
+      <h3 class="font-bold text-2xl">Skills</h3>
+      <hr class="border-2 border-black w-full my-2" />
+      <p>{{skill.name}}</p>
+      <p>{{skill.type}}</p>
+    </div>
+    <div class="pb-6">
+    <h3 class="font-bold text-2xl">Project</h3>
+    <hr class="border-2 border-black w-full my-2" />
+    {% if person.project %}
+        <p>{{ person.project }}</p>
+    {% else %}
+        <p>No project found!</p>
+    {% endif %}
+    </div>
+    <div class="pb-6">
+    <h3 class="font-bold text-2xl">Reference</h3>
+    <hr class="border-2 border-black w-full my-2" />
+    {% if person.reference %}
+        <p>{{ person.reference }}</p>
+    {% else %}
+        <p>No reference found!</p>
+    {% endif %}
+    </div>
   </div>
 </div>
 
